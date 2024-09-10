@@ -4,10 +4,11 @@ import re
 import glob
 import os
 import csv
+import time
 
 # Función para obtener el último archivo CSV generado
 def get_latest_csv_file(directory='csv'):
-    csv_files = glob.glob(os.path.join(directory, 'device*.csv'))
+    csv_files = glob.glob(os.path.join(directory, 'devices.csv'))
     if not csv_files:
         raise FileNotFoundError("No se encontraron archivos CSV en el directorio.")
     
@@ -37,7 +38,8 @@ def read_connected_devices_from_csv(csv_file):
 
 # Función para ejecutar arp-scan y obtener los dispositivos de la red local
 def arp_scan():
-    command = ['sudo', 'arp-scan', '--localnet']
+    command = ['sudo', 'arp-scan', '--localnet', '--retry=3']
+    time.sleep(3)   
     result = subprocess.run(command, capture_output=True, text=True)
     return result.stdout
 
@@ -86,6 +88,7 @@ def main():
 
         # Ejecutar arp-scan y obtener la salida
         arp_output = arp_scan()
+        print("Salida de arp-scan:", arp_output)  # Para depuración        
 
         # Comparar direcciones MAC
         matched_devices = compare_mac_addresses(csv_devices, arp_output)

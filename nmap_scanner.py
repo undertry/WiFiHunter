@@ -20,22 +20,22 @@ def read_scan_mode(file_path='json/scan_mode.json'):
     try:
         with open(file_path, 'r') as json_file:
             data = json.load(json_file)
-            return data.get("mode", "rapido")  # Default mode
+            return data.get("mode", "quick")  # Default mode
     except FileNotFoundError:
         print(f"Error: No se encontró el archivo {file_path}. Usando modo predeterminado 'rapido'.")
-        return "rapido"
+        return "quick"
 
 # Función para ejecutar un escaneo con nmap, adaptado según el modo
 def nmap_scan(ip, mode):
-     # Configuración de comandos según el modo
+    # Configuración de comandos según el modo
     scan_options = {
-        'rapido': ['-T5', '-F'],  # Escaneo rápido con pocas opciones
-        'intermedio': ['-sV', '-O', '-T4', '--min-rate', '5000'],  # Escaneo de versión y OS
-        'profundo': ['-sV', '-O', '-A', '-p-', '-Pn', '--script', 'vuln', '--min-rate', '1000']  # Escaneo completo y agresivo
+        'quick': ['-T5', '-F'],  # Escaneo rápido con pocas opciones
+        'intermediate': ['-sV', '-O', '-T4', '--min-rate', '5000'],  # Escaneo de versión y OS
+        'deep': ['-sV', '-O', '-A', '-p-', '-Pn', '--script', 'vuln', '--min-rate', '1000']  # Escaneo completo y agresivo
     }
 
     # Comando base de nmap
-    command = ['nmap'] + scan_options.get(mode, scan_options['rapido']) + ['-n', '--open', ip]
+    command = ['nmap'] + scan_options.get(mode, scan_options['quick']) + ['-n', '--open', ip]
     print(f"Ejecutando escaneo en modo {mode} para IP: {ip}")
 
     try:

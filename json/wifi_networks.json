@@ -1,44 +1,44 @@
 [
     {
-        "BSSID": "E8:AD:A6:0B:08:06",
-        "ESSID": "Zeballos -2.4GHz",
-        "Signal": "-78",
+        "BSSID": "4A:4B:D4:3E:B5:E4",
+        "ESSID": "Personal Wifi Zone",
+        "Signal": "-65",
+        "Channel": "1",
+        "Encryption": "OPN"
+    },
+    {
+        "BSSID": "48:4B:D4:3E:B5:E0",
+        "ESSID": "Personal-5DC",
+        "Signal": "-63",
         "Channel": "1",
         "Encryption": "WPA2"
     },
     {
         "BSSID": "EA:AD:A6:0B:09:0A",
         "ESSID": "Personal Wifi Zone",
-        "Signal": "-78",
+        "Signal": "-69",
         "Channel": "1",
         "Encryption": "OPN"
     },
     {
         "BSSID": "78:45:61:DA:B9:C0",
         "ESSID": "Fibertel Comba 2.4GHz",
-        "Signal": "-43",
-        "Channel": "1",
-        "Encryption": "WPA2"
-    },
-    {
-        "BSSID": "B8:26:D4:0A:6A:42",
-        "ESSID": "RioTel-VILLAFANE",
-        "Signal": "-76",
-        "Channel": "1",
-        "Encryption": "WPA2"
-    },
-    {
-        "BSSID": "B8:26:D4:0A:9B:42",
-        "ESSID": "MICATROTTO",
-        "Signal": "-82",
+        "Signal": "-45",
         "Channel": "1",
         "Encryption": "WPA2"
     },
     {
         "BSSID": "B8:26:D4:0A:95:C2",
         "ESSID": "RioTel_CUAGLIA_597",
-        "Signal": "-81",
+        "Signal": "-54",
         "Channel": "6",
+        "Encryption": "WPA2"
+    },
+    {
+        "BSSID": "E8:AD:A6:0B:08:06",
+        "ESSID": "Zeballos -2.4GHz",
+        "Signal": "-70",
+        "Channel": "1",
         "Encryption": "WPA2"
     },
     {
@@ -46,34 +46,6 @@
         "ESSID": "RioTel_MARTIN_10348",
         "Signal": "-71",
         "Channel": "6",
-        "Encryption": "WPA2"
-    },
-    {
-        "BSSID": "48:4B:D4:3E:B5:E0",
-        "ESSID": "Personal-5DC",
-        "Signal": "-65",
-        "Channel": "11",
-        "Encryption": "WPA2"
-    },
-    {
-        "BSSID": "4A:4B:D4:3E:B5:E4",
-        "ESSID": "Personal Wifi Zone",
-        "Signal": "-65",
-        "Channel": "11",
-        "Encryption": "OPN"
-    },
-    {
-        "BSSID": "B8:26:D4:08:54:B2",
-        "ESSID": "RioTel_VEGA",
-        "Signal": "-84",
-        "Channel": "11",
-        "Encryption": "WPA2"
-    },
-    {
-        "BSSID": "B8:26:D4:0A:97:82",
-        "ESSID": "RioTel_BERNARDI_599",
-        "Signal": "-85",
-        "Channel": "11",
         "Encryption": "WPA2"
     }
 ]

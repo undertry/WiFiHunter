@@ -1,0 +1,14 @@
+
+BSSID, First time seen, Last time seen, channel, Speed, Privacy, Cipher, Authentication, Power, # beacons, # IV, LAN IP, ID-length, ESSID, Key
+78:45:61:DA:B9:C0, 2024-09-10 16:39:35, 2024-09-10 16:39:42,  1, 195, WPA2, CCMP TKIP, PSK, -42,        6,       24,   0.  0.  0.  0,  21, Fibertel Comba 2.4GHz, 
+48:4B:D4:3E:B5:E0, 2024-09-10 16:39:35, 2024-09-10 16:39:42,  1, 195, WPA2, CCMP, PSK, -60,        5,        0,   0.  0.  0.  0,  12, Personal-5DC, 
+4A:4B:D4:3E:B5:E4, 2024-09-10 16:39:35, 2024-09-10 16:39:42,  1, 195, OPN, ,   , -61,        6,        0,   0.  0.  0.  0,  18, Personal Wifi Zone, 
+EA:AD:A6:0B:09:0A, 2024-09-10 16:39:35, 2024-09-10 16:39:42,  1, 195, OPN, ,   , -70,        5,        0,   0.  0.  0.  0,  18, Personal Wifi Zone, 
+B8:26:D4:08:47:B2, 2024-09-10 16:39:35, 2024-09-10 16:39:42,  6,  54, WPA2, CCMP TKIP, PSK, -69,        4,        0,   0.  0.  0.  0,  19, RioTel_MARTIN_10348, 
+B8:26:D4:0A:95:C2, 2024-09-10 16:39:35, 2024-09-10 16:39:42,  6,  54, WPA2, CCMP TKIP, PSK, -53,        7,        0,   0.  0.  0.  0,  18, RioTel_CUAGLIA_597, 
+E8:AD:A6:0B:08:06, 2024-09-10 16:39:41, 2024-09-10 16:39:42,  1, 195, WPA2, CCMP, PSK,   0,        2,       11,   0.  0.  0.  0,  16, Zeballos -2.4GHz, 
+
+Station MAC, First time seen, Last time seen, Power, # packets, BSSID, Probed ESSIDs
+00:EB:D8:E2:71:D0, 2024-09-10 16:39:38, 2024-09-10 16:39:42, -18,       24, 78:45:61:DA:B9:C0,
+EA:76:AD:75:43:27, 2024-09-10 16:39:41, 2024-09-10 16:39:42,  -1,       11, E8:AD:A6:0B:08:06,
+

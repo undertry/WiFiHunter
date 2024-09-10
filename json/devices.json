@@ -1,9 +1,9 @@
 {
     "Connected Devices": [
         {
-            "Station MAC": "6C:FD:B9:A8:1B:2C",
-            "Power": "-52",
-            "Frames": "36",
+            "Station MAC": "00:EB:D8:E2:71:D0",
+            "Power": "-23",
+            "Frames": "19",
             "BSSID": "78:45:61:DA:B9:C0"
         }
     ]

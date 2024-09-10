@@ -6,7 +6,7 @@ import json
 # Rutas de los archivos CSV y JSON
 devices_csv_file = 'csv/devices.csv'
 devices_json_file = 'json/devices.json'
-selected_network_file = 'json/respuesta.json'
+selected_network_file = 'json/response.json'
 
 def get_scan_duration():
     mode_file = 'json/scan_mode.json'

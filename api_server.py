@@ -132,7 +132,7 @@ def save_network():
         os.makedirs('json')
 
     # Guardar los datos recibidos en un archivo JSON dentro de la carpeta 'json'
-    with open('json/respuesta.json', 'w') as f:
+    with open('json/response.json', 'w') as f:
         # Almacenar el JSON recibido en 'respuesta.json' con formato legible (indentado)
         json.dump(data, f, indent=4)
 

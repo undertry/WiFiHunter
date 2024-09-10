@@ -1,50 +1,99 @@
 [
     {
-        "BSSID": "4A:4B:D4:3E:B5:E4",
-        "ESSID": "Personal Wifi Zone",
-        "Signal": "-65",
-        "Channel": "1",
-        "Encryption": "OPN"
+        "BSSID": "80:E1:BF:15:53:88",
+        "ESSID": "RioTel_GONZALEZ",
+        "Signal": "-82",
+        "Channel": "10",
+        "Encryption": "WPA2 WPA"
     },
     {
-        "BSSID": "48:4B:D4:3E:B5:E0",
-        "ESSID": "Personal-5DC",
-        "Signal": "-63",
+        "BSSID": "B8:26:D4:0A:95:C2",
+        "ESSID": "RioTel_CUAGLIA_597",
+        "Signal": "-82",
+        "Channel": "6",
+        "Encryption": "WPA2"
+    },
+    {
+        "BSSID": "B8:26:D4:0A:6A:42",
+        "ESSID": "RioTel-VILLAFANE",
+        "Signal": "-80",
+        "Channel": "1",
+        "Encryption": "WPA2"
+    },
+    {
+        "BSSID": "E8:AD:A6:0B:08:06",
+        "ESSID": "Zeballos -2.4GHz",
+        "Signal": "-76",
         "Channel": "1",
         "Encryption": "WPA2"
     },
     {
         "BSSID": "EA:AD:A6:0B:09:0A",
         "ESSID": "Personal Wifi Zone",
-        "Signal": "-69",
+        "Signal": "-75",
         "Channel": "1",
         "Encryption": "OPN"
     },
     {
         "BSSID": "78:45:61:DA:B9:C0",
         "ESSID": "Fibertel Comba 2.4GHz",
-        "Signal": "-45",
+        "Signal": "-38",
         "Channel": "1",
         "Encryption": "WPA2"
     },
     {
-        "BSSID": "B8:26:D4:0A:95:C2",
-        "ESSID": "RioTel_CUAGLIA_597",
-        "Signal": "-54",
+        "BSSID": "4A:4B:D4:3E:B5:E4",
+        "ESSID": "Personal Wifi Zone",
+        "Signal": "-67",
+        "Channel": "11",
+        "Encryption": "OPN"
+    },
+    {
+        "BSSID": "48:4B:D4:3E:B5:E0",
+        "ESSID": "Personal-5DC",
+        "Signal": "-66",
+        "Channel": "11",
+        "Encryption": "WPA2"
+    },
+    {
+        "BSSID": "B8:26:D4:0A:A2:22",
+        "ESSID": "Minuz_WiFi",
+        "Signal": "-82",
         "Channel": "6",
         "Encryption": "WPA2"
     },
     {
-        "BSSID": "E8:AD:A6:0B:08:06",
-        "ESSID": "Zeballos -2.4GHz",
-        "Signal": "-70",
-        "Channel": "1",
+        "BSSID": "B8:26:D4:0C:DE:F2",
+        "ESSID": "RioTel_SARACCHINI_679",
+        "Signal": "-85",
+        "Channel": "11",
         "Encryption": "WPA2"
     },
     {
         "BSSID": "B8:26:D4:08:47:B2",
         "ESSID": "RioTel_MARTIN_10348",
-        "Signal": "-71",
+        "Signal": "-78",
+        "Channel": "6",
+        "Encryption": "WPA2"
+    },
+    {
+        "BSSID": "B8:26:D4:0A:98:52",
+        "ESSID": "RioTel_LEIRIA_616",
+        "Signal": "-84",
+        "Channel": "6",
+        "Encryption": "WPA2"
+    },
+    {
+        "BSSID": "B8:26:D4:08:54:B2",
+        "ESSID": "RioTel_VEGA",
+        "Signal": "-86",
+        "Channel": "11",
+        "Encryption": "WPA2"
+    },
+    {
+        "BSSID": "9C:53:22:18:16:30",
+        "ESSID": "RioTel_LEIRIA_616_EXT",
+        "Signal": "-84",
         "Channel": "6",
         "Encryption": "WPA2"
     }

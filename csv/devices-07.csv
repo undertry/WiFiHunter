@@ -1,6 +1,0 @@
-
-BSSID, First time seen, Last time seen, channel, Speed, Privacy, Cipher, Authentication, Power, # beacons, # IV, LAN IP, ID-length, ESSID, Key
-78:45:61:DA:B9:C0, 2024-09-10 16:49:25, 2024-09-10 16:49:34,  1, 195, WPA2, CCMP TKIP, PSK, -41,       89,       12,   0.  0.  0.  0,  21, Fibertel Comba 2.4GHz, 
-
-Station MAC, First time seen, Last time seen, Power, # packets, BSSID, Probed ESSIDs
-

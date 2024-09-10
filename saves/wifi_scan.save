@@ -2,8 +2,10 @@ import subprocess
 import csv
 import os
 import json
-from monitor_mode import enable_monitor_mode, disable_monitor_mode
 
+# Rutas de los archivos CSV y JSON para las redes WiFi
+wifi_csv_file = 'csv/wifi_networks.csv'
+wifi_json_file = 'json/wifi_networks.json'
 # Función para cargar la duración del escaneo directamente del JSON
 def get_scan_duration():
     mode_file = 'json/scan_mode.json'
@@ -104,6 +106,38 @@ def parse_airodump_csv(input_file, output_file):
 
     print(f"Datos de redes WiFi guardados en {output_file}")
 
+def csv_to_json_wifi(csv_filepath, json_filepath):
+    wifi_networks = []
+
+    try:
+        # Comprobar si el archivo CSV existe
+        if not os.path.exists(csv_filepath):
+            print(f"No se encontró el archivo CSV: {csv_filepath}")
+            return
+
+        # Leer el archivo CSV
+        with open(csv_filepath, mode='r') as file:
+            csv_reader = csv.DictReader(file)
+            for row in csv_reader:
+                # Filtrar y estructurar los datos relevantes
+                wifi_network = {
+                    "BSSID": row.get("BSSID", "").strip(),
+                    "ESSID": row.get("ESSID", "").strip(),
+                    "Signal": row.get("Signal", "").strip(),
+                    "Channel": row.get("Channel", "").strip(),
+                    "Encryption": row.get("Encryption", "").strip()
+                }
+                wifi_networks.append(wifi_network)
+
+        # Escribir los datos en formato JSON
+        with open(json_filepath, mode='w') as json_file:
+            json.dump(wifi_networks, json_file, indent=4)
+
+        print(f"Datos de redes WiFi convertidos a JSON y guardados en: {json_filepath}")
+
+    except Exception as e:
+        print(f"Error al convertir el CSV a JSON: {e}")
+
 # Función principal
 def main():
     interface = 'wlan0'
@@ -117,9 +151,6 @@ def main():
     output_file_csv = f'{output_file_prefix}.csv'
 
     try:
-        # Habilitar modo monitor
-        enable_monitor_mode(interface)
-
         # Ejecutar el escaneo de redes
         run_airodump(interface, output_file_prefix)
 
@@ -135,6 +166,8 @@ def main():
     except Exception as e:
         print(f"Ocurrió un error durante el escaneo: {e}")
 
+ # Convertir el CSV de redes WiFi a JSON
+    csv_to_json_wifi(wifi_csv_file, wifi_json_file)
 
 if __name__ == "__main__":
     main()

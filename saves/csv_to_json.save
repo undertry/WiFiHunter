@@ -7,7 +7,7 @@ wifi_csv_file = 'csv/wifi_networks.csv'
 wifi_json_file = 'json/wifi_networks.json'
 
 # Rutas de los archivos CSV y JSON para los dispositivos conectados
-device_csv_file = 'csv/devices.csv'
+device_csv_file = 'csv/devices-01.csv'
 device_json_file = 'json/connected_devices.json'
 
 def csv_to_json_wifi(csv_filepath, json_filepath):

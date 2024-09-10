@@ -1,8 +1,0 @@
-Red seleccionada: Fibertel Comba 2.4GHz (BSSID: 78:45:61:DA:B9:C0)
-Traceback (most recent call last):
-  File "/home/kali/Documents/nvs_project/device_scan.py", line 129, in <module>
-    main()
-  File "/home/kali/Documents/nvs_project/device_scan.py", line 105, in main
-    duration = get_scan_duration(mode)
-               ^^^^^^^^^^^^^^^^^^^^^^^
-TypeError: get_scan_duration() takes 0 positional arguments but 1 was given

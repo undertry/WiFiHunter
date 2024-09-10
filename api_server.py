@@ -1,12 +1,40 @@
 import wifi_scan
+import device_scan
+import subprocess
 import os
 import json
+from threading import Thread
+import logging
 from flask import Flask, request, jsonify
 
 app = Flask(__name__)
 
 WIFI_JSON_FILE = 'json/wifi_networks.json'
 NMAP_JSON_FILE = 'json/nmap_scan_results.json'
+DEVICE_JSON_FILE = 'json/matched_devices.json'
+
+# Configuración básica de logging
+logging.basicConfig(filename='json/device_scan.log', level=logging.INFO)
+
+@app.route('/test', methods=['GET'])
+def test():
+    return jsonify({"message": "Conexión exitosa"})
+
+
+@app.route('/create-status-file', methods=['GET'])
+def create_status_file():
+    try:
+        # Ruta del archivo a crear
+        file_path = "/home/kali/Documents/nvs_project/api_status.txt"
+        
+        # Crear el archivo como señal de que la API está funcionando
+        with open(file_path, "w") as file:
+            file.write("API is running")
+        
+        return jsonify({"message": "Status file created"}), 200
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
 
 # Ruta para guardar el modo y la duración seleccionados
 @app.route('/set-scan-mode', methods=['POST'])
@@ -48,6 +76,18 @@ def scan():
 
     return jsonify(networks), 200
 
+# Ruta para obtener los dispositivos emparejados
+@app.route('/devices', methods=['GET'])
+def get_matched_devices():
+    if os.path.exists(DEVICE_JSON_FILE):
+        with open(DEVICE_JSON_FILE, 'r') as json_file:
+            devices = json.load(json_file)
+    else:
+        devices = {"error": "El archivo de dispositivos emparejados no existe."}
+
+    return jsonify(devices), 200
+
+
 # Ruta para guardar la red seleccionada
 @app.route('/save-network', methods=['POST'])
 def save_network():
@@ -84,6 +124,21 @@ def get_ports_services():
         return jsonify(response_data), 200
     else:
         return jsonify({"error": "Nmap scan result not found."}), 404
+
+
+
+@app.route('/start-wifi-scan', methods=['POST'])
+def start_wifi_scan():
+    try:
+        logging.info("Iniciando escaneo de WiFi.")
+        # Ejecutar airodump con permisos de root
+        subprocess.check_call(['sudo', 'python3', '/home/kali/nvs_project/wifi_scan.py'])
+        logging.info("Escaneo de WiFi completado.")
+        return jsonify({"message": "Escaneo de WiFi iniciado correctamente"}), 200
+    except subprocess.CalledProcessError as e:
+        error_message = f"Error al iniciar el escaneo de WiFi: {e}"
+        logging.error(error_message)
+        return jsonify({"message": error_message}), 500
 
 @app.route('/nmap/vulnerabilities', methods=['GET'])
 def get_vulnerabilities():

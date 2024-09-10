@@ -1,179 +1,27 @@
 [
     {
-        "ip": "192.168.0.98",
-        "mac": "f4-c8-8a-2f-c8-7b",
+        "ip": "192.168.0.23",
+        "mac": "6c:fd:b9:a8:1b:2c",
         "ports_services": [
             {
                 "port": "80/tcp",
                 "state": "open",
-                "service": "http Apache httpd 2.4.58 ((Win64) OpenSSL/3.1.3 PHP/8.2.12)",
-                "vulnerabilities": [
-                    {
-                        "cve": null,
-                        "description": "|   VULNERABLE:"
-                    },
-                    {
-                        "cve": null,
-                        "description": "|     State: LIKELY VULNERABLE"
-                    },
-                    {
-                        "cve": "CVE-2007-6750",
-                        "description": "CVE:CVE-2007-6750"
-                    },
-                    {
-                        "cve": "CVE-2007-6750",
-                        "description": "//cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2007-6750"
-                    },
-                    {
-                        "cve": "CVE-2024-38476",
-                        "description": "//vulners.com/cve/CVE-2024-38476"
-                    },
-                    {
-                        "cve": "CVE-2024-38474",
-                        "description": "//vulners.com/cve/CVE-2024-38474"
-                    },
-                    {
-                        "cve": "CVE-2024-38475",
-                        "description": "//vulners.com/cve/CVE-2024-38475"
-                    },
-                    {
-                        "cve": "CVE-2024-38473",
-                        "description": "//vulners.com/cve/CVE-2024-38473"
-                    },
-                    {
-                        "cve": "CVE-2024-40898",
-                        "description": "//vulners.com/cve/CVE-2024-40898"
-                    },
-                    {
-                        "cve": "CVE-2024-39573",
-                        "description": "//vulners.com/cve/CVE-2024-39573"
-                    },
-                    {
-                        "cve": "CVE-2024-38477",
-                        "description": "//vulners.com/cve/CVE-2024-38477"
-                    },
-                    {
-                        "cve": "CVE-2024-38472",
-                        "description": "//vulners.com/cve/CVE-2024-38472"
-                    },
-                    {
-                        "cve": "CVE-2024-27316",
-                        "description": "//vulners.com/cve/CVE-2024-27316"
-                    },
-                    {
-                        "cve": "CVE-2024-39884",
-                        "description": "//vulners.com/cve/CVE-2024-39884"
-                    },
-                    {
-                        "cve": "CVE-2024-36387",
-                        "description": "//vulners.com/cve/CVE-2024-36387"
-                    },
-                    {
-                        "cve": "CVE-2024-24795",
-                        "description": "//vulners.com/cve/CVE-2024-24795"
-                    },
-                    {
-                        "cve": "CVE-2023-38709",
-                        "description": "//vulners.com/cve/CVE-2023-38709"
-                    }
-                ]
+                "service": "http",
+                "vulnerabilities": []
             },
             {
                 "port": "443/tcp",
                 "state": "open",
-                "service": "ssl/http Apache httpd 2.4.58 ((Win64) OpenSSL/3.1.3 PHP/8.2.12)",
-                "vulnerabilities": [
-                    {
-                        "cve": "CVE-2024-38476",
-                        "description": "//vulners.com/cve/CVE-2024-38476"
-                    },
-                    {
-                        "cve": "CVE-2024-38474",
-                        "description": "//vulners.com/cve/CVE-2024-38474"
-                    },
-                    {
-                        "cve": "CVE-2024-38475",
-                        "description": "//vulners.com/cve/CVE-2024-38475"
-                    },
-                    {
-                        "cve": "CVE-2024-38473",
-                        "description": "//vulners.com/cve/CVE-2024-38473"
-                    },
-                    {
-                        "cve": "CVE-2024-40898",
-                        "description": "//vulners.com/cve/CVE-2024-40898"
-                    },
-                    {
-                        "cve": "CVE-2024-39573",
-                        "description": "//vulners.com/cve/CVE-2024-39573"
-                    },
-                    {
-                        "cve": "CVE-2024-38477",
-                        "description": "//vulners.com/cve/CVE-2024-38477"
-                    },
-                    {
-                        "cve": "CVE-2024-38472",
-                        "description": "//vulners.com/cve/CVE-2024-38472"
-                    },
-                    {
-                        "cve": "CVE-2024-27316",
-                        "description": "//vulners.com/cve/CVE-2024-27316"
-                    },
-                    {
-                        "cve": "CVE-2024-39884",
-                        "description": "//vulners.com/cve/CVE-2024-39884"
-                    },
-                    {
-                        "cve": "CVE-2024-36387",
-                        "description": "//vulners.com/cve/CVE-2024-36387"
-                    },
-                    {
-                        "cve": "CVE-2024-24795",
-                        "description": "//vulners.com/cve/CVE-2024-24795"
-                    },
-                    {
-                        "cve": "CVE-2023-38709",
-                        "description": "//vulners.com/cve/CVE-2023-38709"
-                    },
-                    {
-                        "cve": null,
-                        "description": "|   VULNERABLE:"
-                    },
-                    {
-                        "cve": null,
-                        "description": "|     State: VULNERABLE"
-                    },
-                    {
-                        "cve": null,
-                        "description": "|   VULNERABLE:"
-                    },
-                    {
-                        "cve": null,
-                        "description": "|     State: LIKELY VULNERABLE"
-                    },
-                    {
-                        "cve": "CVE-2007-6750",
-                        "description": "CVE:CVE-2007-6750"
-                    },
-                    {
-                        "cve": "CVE-2007-6750",
-                        "description": "//cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2007-6750"
-                    }
-                ]
+                "service": "https",
+                "vulnerabilities": []
             },
             {
                 "port": "3306/tcp",
                 "state": "open",
-                "service": "mysql MariaDB (unauthorized)",
-                "vulnerabilities": []
-            },
-            {
-                "port": "7680/tcp",
-                "state": "open",
-                "service": "pando-pub?",
+                "service": "mysql",
                 "vulnerabilities": []
             }
         ],
-        "os_info": "Microsoft Windows XP|2019 (89%)"
+        "os_info": null
     }
 ]

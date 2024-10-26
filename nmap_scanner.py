@@ -1,6 +1,7 @@
 import json
 import subprocess
 import re
+import os
 
 # Función para leer el archivo matched_devices.json
 def read_matched_devices(file_path='json/matched_devices.json'):
@@ -14,9 +15,29 @@ def read_matched_devices(file_path='json/matched_devices.json'):
         print(f"Error: No se encontró el archivo {file_path}.")
         return []
 
-# Función para ejecutar un escaneo simple con nmap
-def nmap_scan(ip):
-    command = ['nmap', '-sV', '-O', '-A', '-p-', '-Pn', '-d', '--script', 'vuln', '--min-rate', '5000', '-n', '--open', ip]
+# Función para leer el archivo scan_mode.json
+def read_scan_mode(file_path='json/scan_mode.json'):
+    try:
+        with open(file_path, 'r') as json_file:
+            data = json.load(json_file)
+            return data.get("mode", "rapido")  # Default mode
+    except FileNotFoundError:
+        print(f"Error: No se encontró el archivo {file_path}. Usando modo predeterminado 'rapido'.")
+        return "rapido"
+
+# Función para ejecutar un escaneo con nmap, adaptado según el modo
+def nmap_scan(ip, mode):
+     # Configuración de comandos según el modo
+    scan_options = {
+        'rapido': ['-T5', '-F'],  # Escaneo rápido con pocas opciones
+        'intermedio': ['-sV', '-O', '-T4', '--min-rate', '5000'],  # Escaneo de versión y OS
+        'profundo': ['-sV', '-O', '-A', '-p-', '-Pn', '--script', 'vuln', '--min-rate', '1000']  # Escaneo completo y agresivo
+    }
+
+    # Comando base de nmap
+    command = ['nmap'] + scan_options.get(mode, scan_options['rapido']) + ['-n', '--open', ip]
+    print(f"Ejecutando escaneo en modo {mode} para IP: {ip}")
+
     try:
         result = subprocess.run(command, capture_output=True, text=True, check=True)
         return result.stdout
@@ -30,9 +51,8 @@ def parse_nmap_output(nmap_output):
         'ports_services': [],
         'os_info': None
     }
-    
-    current_port = None  # Variable para llevar el seguimiento del puerto actual
-    current_service = None
+
+    current_port = None
 
     # Imprimir la salida de Nmap para depurar
     print("Salida cruda de Nmap:\n", nmap_output)
@@ -42,19 +62,19 @@ def parse_nmap_output(nmap_output):
         return parsed_data
 
     for line in nmap_output.splitlines():
-        if '/tcp' in line or '/udp' in line:  # Detecta líneas con puertos
+        if '/tcp' in line or '/udp' in line:
             parts = line.split()
             port_service = {
-                'port': parts[0],      # El puerto y protocolo (ej. 80/tcp)
-                'state': parts[1],     # Estado del puerto (open, closed, etc.)
-                'service': ' '.join(parts[2:]),  # Nombre del servicio
-                'vulnerabilities': []  # Inicializar lista de vulnerabilidades para este puerto
+                'port': parts[0],
+                'state': parts[1],
+                'service': ' '.join(parts[2:]),
+                'vulnerabilities': []
             }
             parsed_data['ports_services'].append(port_service)
-            current_port = port_service  # Actualizar el puerto y servicio actual
-        elif 'OS details' in line or 'Running' in line:  # Detecta detalles del sistema operativo
+            current_port = port_service
+        elif 'OS details' in line or 'Running' in line:
             parsed_data['os_info'] = line.split(':', 1)[1].strip() if ':' in line else line.strip()
-        elif 'CVE-' in line:  # Detecta vulnerabilidades con CVE
+        elif 'CVE-' in line:
             cve_match = re.search(r'(CVE-\d{4}-\d+)', line)
             if cve_match and current_port:
                 cve_id = cve_match.group(1)
@@ -63,7 +83,7 @@ def parse_nmap_output(nmap_output):
                     'cve': cve_id,
                     'description': vuln_desc
                 })
-        elif 'VULNERABLE' in line and current_port:  # Detecta descripciones generales de vulnerabilidades
+        elif 'VULNERABLE' in line and current_port:
             vuln_desc = line.strip()
             current_port['vulnerabilities'].append({
                 'cve': None,
@@ -79,18 +99,21 @@ def main():
         print("No se encontraron dispositivos para escanear.")
         return
 
+    # Leer el modo de escaneo desde scan_mode.json
+    mode = read_scan_mode()
+
     scan_results = []
 
     for device in matched_devices:
-        ip = device.get('ip_address')  # Usar 'ip_address' del JSON
+        ip = device.get('ip_address')
         if ip:
-            print(f"Escaneando {ip} con nmap...")
-            nmap_output = nmap_scan(ip)
+            print(f"Escaneando {ip} con nmap en modo {mode}...")
+            nmap_output = nmap_scan(ip, mode)
             if nmap_output:
                 parsed_data = parse_nmap_output(nmap_output)
                 scan_results.append({
                     'ip': ip,
-                    'mac': device.get('mac_address'),  # Usar 'mac_address' del JSON
+                    'mac': device.get('mac_address'),
                     'ports_services': parsed_data['ports_services'],
                     'os_info': parsed_data['os_info']
                 })

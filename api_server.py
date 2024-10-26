@@ -11,6 +11,14 @@ NMAP_JSON_FILE = 'json/nmap_scan_results.json'
 # Ruta para escanear redes WiFi y devolver los resultados
 @app.route('/scan', methods=['GET'])
 def scan():
+    data = request.json
+    scan_type = data.get('scan_type', 'quick')
+
+    durations = {'quick': 30, 'intermediate': 120, 'deep': 300}
+    scan_duration = durations.get(scan_type, 30)
+
+    wifi_scan.main(scan_duration)
+
     if os.path.exists(WIFI_JSON_FILE):
         with open(WIFI_JSON_FILE, 'r') as json_file:
             networks = json.load(json_file)

@@ -4,21 +4,14 @@ import os
 import json
 from monitor_mode import enable_monitor_mode, disable_monitor_mode
 
-# Función para determinar el tiempo de escaneo basado en el modo
+# Función para cargar la duración del escaneo directamente del JSON
 def get_scan_duration():
     mode_file = 'json/scan_mode.json'
     if os.path.exists(mode_file):
         with open(mode_file, 'r') as f:
             data = json.load(f)
-            mode = data.get('mode', 'intermedio')
-            # Configurar el tiempo en segundos para cada modo
-            if mode == 'rapido':
-                return 10
-            elif mode == 'intermedio':
-                return 30
-            elif mode == 'profundo':
-                return 60
-    return 30  # Predeterminado: intermedio
+            return data.get('duration', 30)  # 30 segundos como valor predeterminado
+    return 30  # Valor predeterminado si el archivo no existe
 
 # Función para ejecutar airodump-ng y capturar la salida
 def run_airodump(interface, output_file):
@@ -50,17 +43,30 @@ def run_airodump(interface, output_file):
 def get_latest_airodump_csv(output_file_prefix):
     directory = os.path.dirname(output_file_prefix)
     base_filename = os.path.basename(output_file_prefix)
-    
+
     # Buscar todos los archivos con el prefijo dado y terminación en '.csv'
     csv_files = [f for f in os.listdir(directory) if f.startswith(base_filename) and f.endswith('.csv')]
-    
+
     if not csv_files:
         return None
-    
+
+    # Filtrar archivos que contengan sufijos numéricos y omitir otros
+    valid_csv_files = []
+    for f in csv_files:
+        try:
+            # Intentar extraer el sufijo numérico para ordenar
+            int(f.split('-')[-1].split('.')[0])
+            valid_csv_files.append(f)
+        except ValueError:
+            continue  # Ignorar archivos sin sufijo numérico
+
+    if not valid_csv_files:
+        return None  # No hay archivos válidos
+
     # Ordenar los archivos por el sufijo numérico para obtener el más reciente
-    csv_files.sort(key=lambda f: int(f.split('-')[-1].split('.')[0]), reverse=True)
-    
-    return os.path.join(directory, csv_files[0])
+    valid_csv_files.sort(key=lambda f: int(f.split('-')[-1].split('.')[0]), reverse=True)
+
+    return os.path.join(directory, valid_csv_files[0])
 
 # Función para analizar el archivo CSV generado por airodump-ng
 def parse_airodump_csv(input_file, output_file):

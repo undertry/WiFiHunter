@@ -8,26 +8,26 @@ app = Flask(__name__)
 WIFI_JSON_FILE = 'json/wifi_networks.json'
 NMAP_JSON_FILE = 'json/nmap_scan_results.json'
 
-#Ruta para guardar el modo seleccionado
+# Ruta para guardar el modo y la duración seleccionados
 @app.route('/set-scan-mode', methods=['POST'])
 def set_scan_mode():
     data = request.json
-    if not data or 'mode' not in data:
-        return jsonify({'error': 'No mode data received'}), 400
+    if not data or 'mode' not in data or 'duration' not in data:
+        return jsonify({'error': 'No mode or duration data received'}), 400
 
     scan_mode = data['mode'].lower()
-    
+    duration = data['duration']
+
     # Validar que el modo sea válido
     if scan_mode not in ['rapido', 'intermedio', 'profundo']:
         return jsonify({'error': 'Invalid mode selected'}), 400
 
-    # Guardar el modo de escaneo en un archivo JSON
+    # Guardar el modo y la duración en un archivo JSON
     mode_file = 'json/scan_mode.json'
     with open(mode_file, 'w') as f:
-        json.dump({'mode': scan_mode}, f, indent=4)
-    
-    return jsonify({'message': f'Scan mode set to {scan_mode}'}), 200
+        json.dump({'mode': scan_mode, 'duration': duration}, f, indent=4)
 
+    return jsonify({'message': f'Scan mode set to {scan_mode} with duration {duration} seconds'}), 200
 
 # Ruta para escanear redes WiFi y devolver los resultados
 @app.route('/scan', methods=['GET'])

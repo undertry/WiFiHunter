@@ -7,6 +7,22 @@ import json  # Asegurarnos de importar json
 # Importar las funciones para manejar el modo monitor/managed
 from monitor_mode import enable_monitor_mode, disable_monitor_mode
 
+# Función para cargar la duración del escaneo directamente del JSON
+def get_scan_duration():
+    mode_file = 'json/scan_mode.json'
+    if os.path.exists(mode_file):
+        with open(mode_file, 'r') as f:
+            data = json.load(f)
+            return data.get('duration', 30)  # 30 segundos como valor predeterminado
+    return 30  # Valor predeterminado si el archivo no existe
+
+# Función para obtener el archivo JSON con el modo seleccionado
+def load_scan_mode(json_file='json/scan_mode.json'):
+    with open(json_file, 'r') as file:
+        mode_data = json.load(file)
+    return mode_data.get("mode", "Rápido") # valor por defecto si el modo no esta especificado
+
+
 # Función para obtener el archivo JSON con la red seleccionada
 def load_selected_network(json_file='json/respuesta.json'):
     with open(json_file, 'r') as file:
@@ -14,7 +30,7 @@ def load_selected_network(json_file='json/respuesta.json'):
     return selected_network
 
 # Función para ejecutar airodump-ng con el BSSID y canal especificados
-def run_airodump(bssid, channel, output_file):
+def run_airodump(bssid, channel, output_file, scan_duration):
     # Eliminar cualquier archivo existente que comience con output_file
     for file in os.listdir('csv'):
         if file.startswith(output_file):
@@ -29,7 +45,7 @@ def run_airodump(bssid, channel, output_file):
     print(f"Ejecutando: {' '.join(airodump_command)}")
     # Iniciar el proceso
     process = subprocess.Popen(airodump_command, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-    time.sleep(120)  # Esperar 2 minutos
+    time.sleep(scan_duration)  # Esperar el tiempo basado en el modo de escaneo
     process.terminate()  # Detener el proceso
 
     # Capturar la salida y errores
@@ -84,21 +100,20 @@ def main():
     selected_network = load_selected_network()
     print(f"Red seleccionada: {selected_network['essid']} (BSSID: {selected_network['bssid']})")
 
+    # Cargar el modo de escaneo desde el archivo mode.json
+    mode = load_scan_mode()
+    duration = get_scan_duration()    
+    
+    print(f"Modo de escaneo seleccionado: {mode} (Duración: {duration} segundos)")
+
     bssid = selected_network['bssid']
     channel = selected_network['channel']
 
     # Nombre base para el archivo CSV (sin sufijo numérico)
     csv_file_prefix = 'device'
 
-    # Habilitar modo monitor
-    try:
-        enable_monitor_mode('wlan0')
-    except Exception as e:
-        print(f"Error al habilitar modo monitor: {e}")
-        return
-
-    # Ejecutar airodump-ng
-    run_airodump(bssid, channel, csv_file_prefix)
+    # Ejecutar airodump-ng con la duración del modo de escaneo seleccionado
+    run_airodump(bssid, channel, csv_file_prefix, duration)
 
     # Limpiar y renombrar el archivo CSV a 'devices.csv'
     clean_csv_file = os.path.join(csv_directory, 'devices.csv')

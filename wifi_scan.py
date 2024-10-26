@@ -1,21 +1,41 @@
 import subprocess
 import csv
 import os
+import json
 from monitor_mode import enable_monitor_mode, disable_monitor_mode
 
+# Función para determinar el tiempo de escaneo basado en el modo
+def get_scan_duration():
+    mode_file = 'json/scan_mode.json'
+    if os.path.exists(mode_file):
+        with open(mode_file, 'r') as f:
+            data = json.load(f)
+            mode = data.get('mode', 'intermedio')
+            # Configurar el tiempo en segundos para cada modo
+            if mode == 'rapido':
+                return 10
+            elif mode == 'intermedio':
+                return 30
+            elif mode == 'profundo':
+                return 60
+    return 30  # Predeterminado: intermedio
+
 # Función para ejecutar airodump-ng y capturar la salida
-def run_airodump(interface, output_file, scan_duration):
-    print(f"Iniciando escaneo de redes WiFi en {interface}mon durante {scan_duration} segundos...")
+def run_airodump(interface, output_file):
+    scan_duration = get_scan_duration()  # Obtener la duración según el modo
+    print(f"Iniciando escaneo de redes WiFi en {interface}mon por {scan_duration} segundos...")
+
     try:
         airodump_command = [
-            'sudo', 'airodump-ng', '--write-interval', '1', '--write', output_file, '--output-format', 'csv',
-            f'{interface}mon'
+            'sudo', 'airodump-ng', '--write-interval', '1', '--write', output_file, '--output-format', 'csv', f'{interface}mon'
         ]
         process = subprocess.Popen(airodump_command, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        
+        # Ejecutar el escaneo durante el tiempo determinado
         process.wait(timeout=scan_duration)
+        
         process.terminate()
         stdout, stderr = process.communicate()
-
         if stderr:
             print(f"Errores:\n{stderr.decode()}")
         else:
@@ -79,10 +99,8 @@ def parse_airodump_csv(input_file, output_file):
     print(f"Datos de redes WiFi guardados en {output_file}")
 
 # Función principal
-def main((scan_duration=30):
+def main():
     interface = 'wlan0'
-
-    print(f"Modo de escaneo seleccionado: {scan_duration} segundos")  # <-- Mensaje de verificación
 
     # Definir las rutas de salida en la carpeta csv
     csv_folder = 'csv'
@@ -97,7 +115,7 @@ def main((scan_duration=30):
         enable_monitor_mode(interface)
 
         # Ejecutar el escaneo de redes
-        run_airodump(interface, output_file_prefix, scan_duration)
+        run_airodump(interface, output_file_prefix)
 
         # Obtener el archivo CSV más reciente de airodump-ng
         latest_csv_file = get_latest_airodump_csv(output_file_prefix)

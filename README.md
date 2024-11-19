@@ -2,7 +2,7 @@
 
 
 <p align="center">
-  <img src="showcase/showcase minimalist.png" alt="urbix" width="1000" height="500">
+  <img src="showcase/nvs.gif" alt="nvs" width="1000" height="500">
 </p>
 
 # WiFiHunter  

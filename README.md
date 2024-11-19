@@ -2,7 +2,7 @@
 
 
 <p align="center">
-  <img src="showcase/nvs.gif" alt="nvs" width="1000" height="500">
+  <img src="showcase/nvs.gif" alt="nvs" width="800" height="300">
 </p>
 
 # WiFiHunter  

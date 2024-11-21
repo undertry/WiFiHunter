@@ -52,7 +52,7 @@ These scripts were developed as part of a thesis project called **NVS** and are 
 
 
 ## 📜 License  
-This project is open-source and available under the <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/legalcode.en" target="_blank">creativecommons License</a>.
+![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)
 
 ## 🧠 Author  
 Developed by [undertry] as part of the **NVS** thesis project.  

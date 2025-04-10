@@ -1,10 +1,4 @@
 ### 📄 `nvs-core` – README
-## Preview
-
-
-<p align="center">
-  <img src="showcase/nvs.png" alt="nvs" width="800" height="400">
-</p>
 
 # 🧠 nvs Core – Network Vulnerability Scanner Engine
 

@@ -1,3 +1,4 @@
+### 📄 `nvs-core` – README
 ## Preview
 
 
@@ -5,57 +6,122 @@
   <img src="showcase/nvs.png" alt="nvs" width="800" height="400">
 </p>
 
+# 🧠 nvs Core – Network Vulnerability Scanner Engine
+
+> `nvs-core` is the backend engine of the **NVS (Network Vulnerability Scanner)** project. It contains CLI scripts and scanning logic to detect device services, open ports, and potential WiFi vulnerabilities. Designed to be used standalone or through the [`nvs-web`](https://github.com/undertry/nvs-web) interface.
+
+![Python](https://img.shields.io/badge/Python-3.8%2B-blue)
+![License](https://img.shields.io/github/license/undertry/nvs-core)
+![Status](https://img.shields.io/badge/Status-Active-green)
+
 ---
 
-# WiFiHunter  
+## 🧰 What It Does
 
-**WiFiHunter** is a Python-based tool designed to automate vulnerability scans, device service checks, and WiFi network detection.  
+- 🔍 Scan for active WiFi networks
+- 🧪 Check for open ports and known vulnerabilities
+- ⚙️ Perform device service fingerprinting
+- 📡 Prepare data for web visualization via API (used by `nvs-web`)
 
-These scripts were developed as part of a thesis project called **NVS** and are intended to be executed remotely through a web interface. Flask is used as the API server to enable seamless communication between the web interface and the scripts.  
+---
 
+## ⚙️ Tech Stack
 
-## 🚀 Features  
-- Automated vulnerability scanning.  
-- Device service checks.  
-- Detection of available WiFi networks.  
-- Remote execution through a web interface.  
+| Category         | Technology         |
+|------------------|--------------------|
+| Language         | Python 3.8+        |
+| Networking       | `nmap`, `nmcli`    |
+| API (optional)   | Flask (minimal API bridge) |
+| Execution Type   | CLI / Script-based |
 
+---
 
-## 🛠️ Technology Stack  
-- **Python**: Core programming language for scripts.  
-- **Flask**: API server for communication between the web interface and backend scripts.  
+## 🛠️ Requirements
 
-## 🖥️ How to Run  
-### Prerequisites  
-1. Install Python 3.8 or later.  
-2. Install Flask:
-   
-   `
-   pip install flask
-   `  
+- Python 3.8+
+- `nmap` installed
+- Linux or Unix-like system (recommended)
+- (Optional) Flask for API mode
 
-### Steps  
-1. Clone the repository:
-   
-   `
-   git clone https://github.com/yourusername/WiFiHunter.git
-   cd WiFiHunter
-   `  
+---
 
-3. Start the Flask API server:
-     
-   `
-   python src/api/server.py
-   ` 
+## 🚀 Getting Started
 
-5. Access the web interface (if implemented) via the specified address (e.g., `http://localhost:5000`).  
+### 1. Clone the Repository
 
+```bash
+git clone https://github.com/undertry/nvs-core.git
+cd nvs-core
+```
 
-## 📜 License  
-![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)
+### 2. (Optional) Create a Virtual Environment
 
-## 🧠 Author  
-Developed by [undertry] as part of the **NVS** thesis project.  
+```bash
+python3 -m venv venv
+source venv/bin/activate
+```
 
-Feel free to contribute or raise issues if you find any bugs or have feature suggestions! 😊  
+### 3. Install Dependencies
+
+```bash
+pip install -r requirements.txt
+```
+
+### 4. Run a Scan Manually
+
+```bash
+python3 scanner.py
+```
+
+Or use specific tools:
+
+```bash
+bash scripts/scan_wifi.sh
+bash scripts/scan_ports.sh
+```
+
+---
+
+## 🌐 Run as API (for `nvs-web` integration)
+
+```bash
+python3 api_server.py
+```
+
+The API will be available at `http://localhost:5000`.
+
+---
+
+## 📁 Project Structure
+
+```
+nvs-core/
+├── scripts/           → Shell scripts for network scanning
+├── scanner.py         → Main Python scanner script
+├── api_server.py      → Optional Flask API
+├── requirements.txt   → Python dependencies
+└── README.md          → You are here
+```
+
+---
+
+## 🔗 Related Projects
+
+- [nvs-web](https://github.com/undertry/nvs-web) – Web interface that connects to `nvs-core` to visualize scans and control actions remotely.
+
+---
+
+## 👨‍💻 Author
+
+- **CLI & Backend:** [@undertry (Tiago Comba)](https://github.com/undertry)
+
+---
+
+## 📄 License
+
+This project is licensed under the **GPL-2.0 License**. See the [LICENSE](LICENSE) file for details.
+
+---
+
+> “Scan smart. Stay secure.” 🔒
 
